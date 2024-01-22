@@ -23,7 +23,6 @@ def get_users_by_id(id: int):
  if user is None:
    return jsonify({ 'error': 'User does not exist'}), 404
  return jsonify(user)
-
 def get_user(id):
 #Generator Expression which returns the user with 
 # a requested ID or simply None:
@@ -42,7 +41,6 @@ def create_user():
     user = json.loads(request.data)
     if not user_is_valid(user):
         return jsonify({ 'error': 'Invalid user properties.' }), 400
-    
     user["id"]=nextUserId
     nextUserId += 1
     users.append(user)
@@ -56,7 +54,6 @@ def delete_user(id: int):
  user = get_user(id)
  if user is None:
    return jsonify({ 'error': 'User does not exist.' }), 404
-
  user = [u for u in users if u['id'] != id]
  return jsonify(user), 200
 
