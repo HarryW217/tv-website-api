@@ -62,3 +62,12 @@ def test_delete_user():
         assert response.status_code == 200
         for user in actual:
             assert "id" in user != 1
+            
+# DELETE a user, invalid id test
+def test_delete_user_invalid_id():
+    expected = { 'error': 'User does not exist.' }
+    with app.app_context():
+        response = requests.delete(f"{ENDPOINT}/users/999999")
+        actual = response.json()
+        assert actual == expected
+        assert response.status_code == 404
